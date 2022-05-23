@@ -1,13 +1,13 @@
 // Assignment code here
 
-let charset = {
+let charset = { // Pre degfining charset for geenrator
   lowercase :"abcdefghijklmnopqrstuvwxyz",
   uppercase : "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   numeric : "0123456789",
   special : "!@#$%^&*()><=",
 }
 
-function getRandomInt(max) {
+function getRandomInt(max) { // Grabs a random integer
   return Math.floor(Math.random() * max);
 }
 
@@ -36,10 +36,10 @@ function makePasswordFromConfig(config) {
   return passwordString
 }
 
-function generatePassword() { 
+function generatePassword() { // Main prompting function for generator.
 
-  let password_length = Number(window.prompt('How long do you want the password to be?'))
-  if (password_length && password_length > 0) {
+  let password_length = Number(window.prompt('How long do you want the password to be?')) // Prompt for length, convert to number
+  if (password_length && password_length > 0) { // If not a number or if its less than or equal to 0, return false with an error.
     let config = {
       password_length : password_length,
       lowercase : window.confirm("Include lowercase letters?"),
@@ -47,6 +47,7 @@ function generatePassword() {
       numeric: window.confirm("Include numeric characters?"),
       special: window.confirm("Include special characters?"),
     }
+    // Check if provided options are valid. If not one is true, then we cant make the password.
     let valid = false
     for (option of Object.values(config)) {
       if (option == true) {
@@ -54,9 +55,9 @@ function generatePassword() {
       }
     }
     if (!valid) {
-      return {success: false, data: "Invalid options"}
+      return {success: false, data: "Invalid options"} // Returns object with a success indicator and the data to go with it.
     } else {
-      return {success: true, data: makePasswordFromConfig(config)} ;
+      return {success: true, data: makePasswordFromConfig(config)}; // Invokes the makePasswordFromConfig function to generate a string from the user input.
     }
   } else {
     return {success: false, data: "Invalid length"}
